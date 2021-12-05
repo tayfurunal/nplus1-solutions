@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -17,7 +18,7 @@ public class PostService {
     private final PostRepository postRepository;
 
     public List<PostDto> findAll() {
-        final List<Post> posts = postRepository.findAll();
+        final List<Post> posts = postRepository.findAllByOrderByUserId();
         return posts.stream().map(postConverter::convert).collect(Collectors.toList());
     }
 }
